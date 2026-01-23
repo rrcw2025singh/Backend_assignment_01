@@ -17,9 +17,21 @@ export const calculatePortfolioPerformance = (
 
   // No if statements (ternary expressions)
   const performanceSummary =
-    percentageChange > 20
-      ? `The portfolio has gained significantly with a profit of $${profitOrLoss.toFixed(2)}.`
-      : `The portfolio has performed poorly.`;
+    initialInvestment === 0
+      ? "Invalid investment amount. Initial investment cannot be zero."
+      : percentageChange > 20
+      ? `Excellent performance. Your portfolio gained $${profitOrLoss.toFixed(
+          2
+        )}.`
+      : percentageChange > 0
+      ? `Solid gain. Your investment increased by $${profitOrLoss.toFixed(
+          2
+        )}.`
+      : percentageChange === 0
+      ? "No change in portfolio value."
+      : `Portfolio loss detected. Your investment decreased by $${Math.abs(
+          profitOrLoss
+        ).toFixed(2)}.`;
 
   return {
     initialInvestment,
